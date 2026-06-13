@@ -7,7 +7,6 @@ A full-stack web application for managing assembly lines, workstations, and thei
 ## Prerequisites
 
 - **Node.js** 18+ and npm
-- Git (optional)
 
 ## Quick Start
 
