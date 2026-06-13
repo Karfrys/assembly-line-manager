@@ -1,0 +1,110 @@
+<div class="page animate-fade-in-up">
+  <div class="page-header">
+    <div>
+      <h1>Allocations</h1>
+      <p class="muted-text">Assign and order workstations on assembly lines</p>
+    </div>
+  </div>
+
+  <div class="line-selector">
+    <mat-form-field appearance="fill" class="line-select-field">
+      <mat-label>Select Assembly Line</mat-label>
+      <mat-select [(ngModel)]="selectedLineId" (selectionChange)="onLineChange()">
+        @for (line of assemblyLines; track line.id) {
+          <mat-option [value]="line.id">
+            {{ line.name }}
+            <span class="option-product">({{ line.product?.name || 'No product' }})</span>
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  @if (selectedLineId) {
+    @if (loading) {
+      <div class="loading-state">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    } @else {
+      <div class="panels">
+        <!-- Allocated Workstations -->
+        <mat-card class="panel allocated-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <mat-icon>assignment</mat-icon>
+              <h3>Allocated Workstations</h3>
+            </div>
+            <span class="count-badge">{{ allocations.length }}</span>
+          </div>
+          <mat-divider></mat-divider>
+
+          @if (allocations.length > 0) {
+            <div cdkDropList class="drop-list" (cdkDropListDropped)="onDrop($event)">
+              @for (alloc of allocations; track alloc.id; let i = $index) {
+                <div class="drag-item" cdkDrag>
+                  <div class="drag-handle" cdkDragHandle>
+                    <mat-icon>drag_indicator</mat-icon>
+                  </div>
+                  <span class="order-num">{{ i + 1 }}</span>
+                  <div class="ws-info">
+                    <span class="ws-code">{{ alloc.workstation?.shortName }}</span>
+                    <span class="ws-name">{{ alloc.workstation?.name }}</span>
+                  </div>
+                  <span class="ws-pc">{{ alloc.workstation?.pcName }}</span>
+                  <button mat-icon-button matTooltip="Remove" (click)="removeAllocation(alloc)" class="remove-btn">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <div class="drag-placeholder" *cdkDragPlaceholder></div>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="empty-panel">
+              <mat-icon>inbox</mat-icon>
+              <p>No workstations allocated yet</p>
+              <p class="hint">Add workstations from the panel on the right</p>
+            </div>
+          }
+        </mat-card>
+
+        <!-- Available Workstations -->
+        <mat-card class="panel available-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <mat-icon>computer</mat-icon>
+              <h3>Available Workstations</h3>
+            </div>
+            <span class="count-badge available-badge">{{ availableWorkstations.length }}</span>
+          </div>
+          <mat-divider></mat-divider>
+
+          @if (availableWorkstations.length > 0) {
+            <div class="available-list">
+              @for (ws of availableWorkstations; track ws.id) {
+                <div class="available-item">
+                  <div class="ws-info">
+                    <span class="ws-code">{{ ws.shortName }}</span>
+                    <span class="ws-name">{{ ws.name }}</span>
+                  </div>
+                  <button mat-icon-button matTooltip="Add to line" (click)="addWorkstation(ws)" class="add-btn" color="primary">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="empty-panel">
+              <mat-icon>check_circle</mat-icon>
+              <p>All workstations are allocated</p>
+            </div>
+          }
+        </mat-card>
+      </div>
+    }
+  } @else {
+    <div class="select-prompt">
+      <mat-icon>touch_app</mat-icon>
+      <p>Select an assembly line above to manage its workstation allocations</p>
+    </div>
+  }
+</div>

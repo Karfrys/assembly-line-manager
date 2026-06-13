@@ -1,0 +1,98 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.shell-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 240px;
+  background: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-color) !important;
+}
+
+.sidenav-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+}
+
+.brand-icon {
+  color: var(--accent);
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.4));
+}
+
+.brand-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: 0.06em;
+}
+
+.mat-mdc-nav-list {
+  padding-top: 8px;
+}
+
+.mat-mdc-nav-list a {
+  margin: 4px 12px;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-secondary) !important;
+  transition: var(--transition) !important;
+}
+
+.mat-mdc-nav-list a:hover {
+  background-color: var(--accent-glow) !important;
+  color: var(--text-primary) !important;
+}
+
+.mat-mdc-nav-list a.active-link {
+  background-color: var(--accent-glow-strong) !important;
+  color: var(--accent) !important;
+}
+
+.mat-mdc-nav-list a.active-link mat-icon {
+  color: var(--accent) !important;
+}
+
+.main-content {
+  background-color: var(--bg-primary);
+}
+
+.toolbar {
+  background: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  height: 56px;
+  padding: 0 24px;
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary) !important;
+}
+
+.user-btn:hover {
+  color: var(--text-primary) !important;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.content-wrapper {
+  padding: 32px;
+  height: calc(100% - 56px);
+  overflow-y: auto;
+}

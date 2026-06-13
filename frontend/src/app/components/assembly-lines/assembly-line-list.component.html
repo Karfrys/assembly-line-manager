@@ -1,0 +1,79 @@
+<div class="page animate-fade-in-up">
+  <div class="page-header">
+    <div>
+      <h1>Assembly Lines</h1>
+      <p class="muted-text">Manage production assembly lines</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="openCreate()">
+      <mat-icon>add</mat-icon>
+      Add Assembly Line
+    </button>
+  </div>
+
+  <mat-card class="table-card">
+    <div class="table-toolbar">
+      <mat-form-field appearance="fill" class="filter-field">
+        <mat-label>Filter by Product</mat-label>
+        <mat-select [(ngModel)]="selectedProductId" (selectionChange)="onFilterChange()">
+          <mat-option [value]="null">All Products</mat-option>
+          @for (product of products; track product.id) {
+            <mat-option [value]="product.id">{{ product.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    @if (filteredLines.length > 0) {
+      <table mat-table [dataSource]="filteredLines" class="data-table">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="line-name">{{ row.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Product</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-chip>{{ row.product?.name || '—' }}</mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef>Active</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-slide-toggle [checked]="row.active" (change)="toggleActive(row)" color="primary"></mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="workstations">
+          <th mat-header-cell *matHeaderCellDef>Workstations</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="count-badge">{{ row.allocations?.length || 0 }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="actions-col">Actions</th>
+          <td mat-cell *matCellDef="let row" class="actions-col">
+            <button mat-icon-button matTooltip="Edit" (click)="openEdit(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete" (click)="delete(row)" class="delete-btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    } @else {
+      <div class="empty-state">
+        <mat-icon>precision_manufacturing</mat-icon>
+        <p>No assembly lines found</p>
+        <button mat-stroked-button color="primary" (click)="openCreate()">Add your first assembly line</button>
+      </div>
+    }
+  </mat-card>
+</div>

@@ -1,0 +1,48 @@
+<div class="dashboard animate-fade-in-up">
+  <div class="welcome">
+    <h1>Welcome back, <span class="accent-text">{{ (authService.currentUser$ | async)?.name || 'User' }}</span></h1>
+    <p class="muted-text">Here's an overview of your assembly line operations.</p>
+  </div>
+
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <div class="stat-icon products-icon">
+        <mat-icon>inventory_2</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.products }}</span>
+        <span class="stat-label">Products</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-icon lines-icon">
+        <mat-icon>precision_manufacturing</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.assemblyLines }}</span>
+        <span class="stat-label">Assembly Lines</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-icon active-icon">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.activeLines }}</span>
+        <span class="stat-label">Active Lines</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-icon workstations-icon">
+        <mat-icon>computer</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.workstations }}</span>
+        <span class="stat-label">Workstations</span>
+      </div>
+    </mat-card>
+  </div>
+</div>
