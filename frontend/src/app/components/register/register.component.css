@@ -1,7 +1,9 @@
 .login-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 24px;
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
   padding: 24px;
@@ -92,3 +94,21 @@ form {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+.auth-footer {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.auth-footer .creator-name {
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.auth-footer .creator-name:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent-glow-strong);
+}
+

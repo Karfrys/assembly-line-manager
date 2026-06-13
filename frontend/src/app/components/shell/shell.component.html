@@ -39,7 +39,13 @@
     </mat-toolbar>
 
     <div class="content-wrapper">
-      <router-outlet />
+      <div class="router-container">
+        <router-outlet />
+      </div>
+      <footer class="app-footer">
+        <mat-icon class="footer-icon">precision_manufacturing</mat-icon>
+        <span>Assembly Line Manager &copy; 2026 &bull; Created by <span class="creator-name">Karol Fryś</span></span>
+      </footer>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
